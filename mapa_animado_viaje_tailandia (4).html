@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_fca6e24741b2b41c875903cc8f916e2e {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+            </style>
+        
+    <script src="https://cdn.jsdelivr.net/npm/leaflet-ant-path@1.1.2/dist/leaflet-ant-path.min.js"></script>
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_fca6e24741b2b41c875903cc8f916e2e" ></div>
+        
+    
+<div style="position: fixed;
+            bottom: 18px; right: 18px; width: 280px;
+            z-index: 9999; font-size: 13px;
+            background: rgba(255,255,255,0.92);
+            border: 1px solid rgba(0,0,0,0.15);
+            border-radius: 12px;
+            padding: 12px 12px 10px 12px;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.12);">
+  <div style="font-weight:700; margin-bottom:8px;">Leyenda</div>
+  <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px;">
+    <span style="display:inline-block; width:34px; height:4px; background:#2563eb; border-radius:4px;"></span>
+    <span>Desplazamientos en avión (junio 2026)</span>
+  </div>
+  <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px;">
+    <span style="display:inline-block; width:34px; height:4px; background:#111827; border-radius:4px;"></span>
+    <span>Ruta animada (incluye conexiones)</span>
+  </div>
+  <div style="margin-top:10px; font-size:12px; color:#374151;">
+    Consejo: activa/desactiva capas arriba a la derecha. Pulsa en los marcadores para ver el plan por día.
+  </div>
+</div>
+
+<div style="position: fixed;
+            top: 18px; left: 18px; width: 320px;
+            z-index: 9999; font-size: 13px;
+            background: rgba(255,255,255,0.92);
+            border: 1px solid rgba(0,0,0,0.15);
+            border-radius: 12px;
+            padding: 12px 12px 10px 12px;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+            max-height: 65vh;
+            overflow: auto;">
+  <div style="font-weight:700; margin-bottom:8px;">Plan día a día (junio 2026)</div>
+  <div style='margin-bottom:4px;'><b>Sáb 13/06/2026</b> — Bangkok</div><div style='margin-bottom:4px;'><b>Dom 14/06/2026</b> — Bangkok</div><div style='margin-bottom:4px;'><b>Lun 15/06/2026</b> — Chiang Mai</div><div style='margin-bottom:4px;'><b>Mar 16/06/2026</b> — Chiang Mai</div><div style='margin-bottom:4px;'><b>Mié 17/06/2026</b> — Chiang Mai</div><div style='margin-bottom:4px;'><b>Jue 18/06/2026</b> — Koh Tao</div><div style='margin-bottom:4px;'><b>Vie 19/06/2026</b> — Koh Tao</div><div style='margin-bottom:4px;'><b>Sáb 20/06/2026</b> — Koh Tao</div><div style='margin-bottom:4px;'><b>Dom 21/06/2026</b> — Bangkok</div><div style='margin-bottom:4px;'><b>Lun 22/06/2026</b> — Bangkok</div>
+</div>
+</body>
+<script>
+    
+    
+            var map_fca6e24741b2b41c875903cc8f916e2e = L.map(
+                "map_fca6e24741b2b41c875903cc8f916e2e",
+                {
+                    center: [14.5, 100.0],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 5,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_f4b25376313a213b511f2d9094af7804 = L.tileLayer(
+                "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png",
+                {"attribution": "\u0026copy; \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"http://cartodb.com/attributions\"\u003eCartoDB\u003c/a\u003e, CartoDB \u003ca href =\"http://cartodb.com/attributions\"\u003eattributions\u003c/a\u003e", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_fca6e24741b2b41c875903cc8f916e2e);
+        
+    
+            var feature_group_d99118fc80d35af7ed99dbeb7c67ccaf = L.featureGroup(
+                {}
+            ).addTo(map_fca6e24741b2b41c875903cc8f916e2e);
+        
+    
+            var marker_fa8fe96caa7230602969562de288668d = L.marker(
+                [13.7563, 100.5018],
+                {}
+            ).addTo(feature_group_d99118fc80d35af7ed99dbeb7c67ccaf);
+        
+    
+            var icon_7823595ba4ae031fefe6f8f6bde90685 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_fa8fe96caa7230602969562de288668d.setIcon(icon_7823595ba4ae031fefe6f8f6bde90685);
+        
+    
+        var popup_03e48f02b438b561d5512d6b3a177412 = L.popup({"maxWidth": 380});
+
+        
+            var html_cc3928cf46dd298704abb26031e2f677 = $(`<div id="html_cc3928cf46dd298704abb26031e2f677" style="width: 100.0%; height: 100.0%;"><div style='max-width:320px;'>             <div style="margin-bottom:10px;">               <div style="font-weight:700; font-size:14px;">Sáb 13/06/2026 — Llegada</div>               <ul style="margin:6px 0 0 18px; padding:0; font-size:13px; line-height:1.25;">                 <li>Llegada a Bangkok.</li>               </ul>             </div>                          <div style="margin-bottom:10px;">               <div style="font-weight:700; font-size:14px;">Dom 14/06/2026 — Bangkok</div>               <ul style="margin:6px 0 0 18px; padding:0; font-size:13px; line-height:1.25;">                 <li>Día en Bangkok.</li>               </ul>             </div>                          <div style="margin-bottom:10px;">               <div style="font-weight:700; font-size:14px;">Dom 21/06/2026 — Vuelo a Bangkok</div>               <ul style="margin:6px 0 0 18px; padding:0; font-size:13px; line-height:1.25;">                 <li>Salida de Koh Tao → Koh Samui (ferry).</li><li>Vuelo Koh Samui → Bangkok.</li>               </ul>             </div>                          <div style="margin-bottom:10px;">               <div style="font-weight:700; font-size:14px;">Lun 22/06/2026 — Salida Bangkok</div>               <ul style="margin:6px 0 0 18px; padding:0; font-size:13px; line-height:1.25;">                 <li>Salida desde Bangkok.</li>               </ul>             </div>             </div></div>`)[0];
+            popup_03e48f02b438b561d5512d6b3a177412.setContent(html_cc3928cf46dd298704abb26031e2f677);
+        
+
+        marker_fa8fe96caa7230602969562de288668d.bindPopup(popup_03e48f02b438b561d5512d6b3a177412)
+        ;
+
+        
+    
+    
+            marker_fa8fe96caa7230602969562de288668d.bindTooltip(
+                `<div>
+                     Bangkok
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_039e5470cf23d7fc9e1948f5c8080df1 = L.marker(
+                [18.7883, 98.9853],
+                {}
+            ).addTo(feature_group_d99118fc80d35af7ed99dbeb7c67ccaf);
+        
+    
+            var icon_17d19470e45a613196d932dee0d05f02 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_039e5470cf23d7fc9e1948f5c8080df1.setIcon(icon_17d19470e45a613196d932dee0d05f02);
+        
+    
+        var popup_129d57530b1ca343562c01c2fba66b83 = L.popup({"maxWidth": 380});
+
+        
+            var html_506485f1ae4ae8c5b107d9355665ffde = $(`<div id="html_506485f1ae4ae8c5b107d9355665ffde" style="width: 100.0%; height: 100.0%;"><div style='max-width:320px;'>             <div style="margin-bottom:10px;">               <div style="font-weight:700; font-size:14px;">Lun 15/06/2026 — Vuelo a Chiang Mai</div>               <ul style="margin:6px 0 0 18px; padding:0; font-size:13px; line-height:1.25;">                 <li>Vuelo Bangkok → Chiang Mai.</li>               </ul>             </div>                          <div style="margin-bottom:10px;">               <div style="font-weight:700; font-size:14px;">Mar 16/06/2026 — Chiang Mai</div>               <ul style="margin:6px 0 0 18px; padding:0; font-size:13px; line-height:1.25;">                 <li>Día en Chiang Mai.</li>               </ul>             </div>                          <div style="margin-bottom:10px;">               <div style="font-weight:700; font-size:14px;">Mié 17/06/2026 — Chiang Mai</div>               <ul style="margin:6px 0 0 18px; padding:0; font-size:13px; line-height:1.25;">                 <li>Día en Chiang Mai.</li>               </ul>             </div>             </div></div>`)[0];
+            popup_129d57530b1ca343562c01c2fba66b83.setContent(html_506485f1ae4ae8c5b107d9355665ffde);
+        
+
+        marker_039e5470cf23d7fc9e1948f5c8080df1.bindPopup(popup_129d57530b1ca343562c01c2fba66b83)
+        ;
+
+        
+    
+    
+            marker_039e5470cf23d7fc9e1948f5c8080df1.bindTooltip(
+                `<div>
+                     Chiang Mai
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_fbb11a3f3d7cb94e6ece6ce9820dc6f5 = L.marker(
+                [10.0986, 99.838],
+                {}
+            ).addTo(feature_group_d99118fc80d35af7ed99dbeb7c67ccaf);
+        
+    
+            var icon_b1e06b4ec0039ea222ab2ce91ac2935f = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_fbb11a3f3d7cb94e6ece6ce9820dc6f5.setIcon(icon_b1e06b4ec0039ea222ab2ce91ac2935f);
+        
+    
+        var popup_fb3fc2d2a374756d4b91831b9546f35c = L.popup({"maxWidth": 380});
+
+        
+            var html_b2d695d7771d713e87448387ae439159 = $(`<div id="html_b2d695d7771d713e87448387ae439159" style="width: 100.0%; height: 100.0%;"><div style='max-width:320px;'>             <div style="margin-bottom:10px;">               <div style="font-weight:700; font-size:14px;">Jue 18/06/2026 — Vuelo hacia Koh Tao</div>               <ul style="margin:6px 0 0 18px; padding:0; font-size:13px; line-height:1.25;">                 <li>Vuelo Chiang Mai → Koh Samui.</li><li>Conexión a Koh Tao (ferry desde Koh Samui).</li>               </ul>             </div>                          <div style="margin-bottom:10px;">               <div style="font-weight:700; font-size:14px;">Vie 19/06/2026 — Koh Tao</div>               <ul style="margin:6px 0 0 18px; padding:0; font-size:13px; line-height:1.25;">                 <li>Día en Koh Tao.</li>               </ul>             </div>                          <div style="margin-bottom:10px;">               <div style="font-weight:700; font-size:14px;">Sáb 20/06/2026 — Koh Tao</div>               <ul style="margin:6px 0 0 18px; padding:0; font-size:13px; line-height:1.25;">                 <li>Día en Koh Tao.</li>               </ul>             </div>             </div></div>`)[0];
+            popup_fb3fc2d2a374756d4b91831b9546f35c.setContent(html_b2d695d7771d713e87448387ae439159);
+        
+
+        marker_fbb11a3f3d7cb94e6ece6ce9820dc6f5.bindPopup(popup_fb3fc2d2a374756d4b91831b9546f35c)
+        ;
+
+        
+    
+    
+            marker_fbb11a3f3d7cb94e6ece6ce9820dc6f5.bindTooltip(
+                `<div>
+                     Koh Tao
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var feature_group_d470d2090ebcdf53021dca973a11def1 = L.featureGroup(
+                {}
+            ).addTo(map_fca6e24741b2b41c875903cc8f916e2e);
+        
+    
+            var poly_line_2474120e69ca19a18f542980d832b3c7 = L.polyline(
+                [[13.7563, 100.5018], [18.7883, 98.9853]],
+                {"bubblingMouseEvents": true, "color": "#2563eb", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2563eb", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 5}
+            ).addTo(feature_group_d470d2090ebcdf53021dca973a11def1);
+        
+    
+            poly_line_2474120e69ca19a18f542980d832b3c7.bindTooltip(
+                `<div>
+                     Lun 15/06/2026 — Vuelo BKK→CNX
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var poly_line_2ae5999c65b815b54fab1465ae77bcb5 = L.polyline(
+                [[18.7883, 98.9853], [9.512, 100.0136]],
+                {"bubblingMouseEvents": true, "color": "#2563eb", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2563eb", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 5}
+            ).addTo(feature_group_d470d2090ebcdf53021dca973a11def1);
+        
+    
+            poly_line_2ae5999c65b815b54fab1465ae77bcb5.bindTooltip(
+                `<div>
+                     Jue 18/06/2026 — Vuelo CNX→USM
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var poly_line_e27841050360d7bf2b12a67fbeffcf93 = L.polyline(
+                [[9.512, 100.0136], [13.7563, 100.5018]],
+                {"bubblingMouseEvents": true, "color": "#2563eb", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2563eb", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 5}
+            ).addTo(feature_group_d470d2090ebcdf53021dca973a11def1);
+        
+    
+            poly_line_e27841050360d7bf2b12a67fbeffcf93.bindTooltip(
+                `<div>
+                     Dom 21/06/2026 — Vuelo USM→BKK
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var feature_group_c8acdb62157977a8ce27a241fb0e9eee = L.featureGroup(
+                {}
+            ).addTo(map_fca6e24741b2b41c875903cc8f916e2e);
+        
+    
+            ant_path_1e14bcd2f320344871ffba541c3f0d31 = L.polyline.antPath(
+              [[13.7563, 100.5018], [18.7883, 98.9853], [9.512, 100.0136], [10.0986, 99.838], [9.512, 100.0136], [13.7563, 100.5018]],
+              {"bubblingMouseEvents": true, "color": "#111827", "dashArray": [10, 20], "dashOffset": null, "delay": 350, "fill": false, "fillColor": "#111827", "fillOpacity": 0.2, "fillRule": "evenodd", "hardwareAcceleration": false, "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "paused": false, "pulseColor": "#ef4444", "reverse": false, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+        ).addTo(feature_group_c8acdb62157977a8ce27a241fb0e9eee);
+        
+    
+            var layer_control_8afe0afd07c8fe929417747488b23340 = {
+                base_layers : {
+                    "cartodbpositron" : tile_layer_f4b25376313a213b511f2d9094af7804,
+                },
+                overlays :  {
+                    "Puntos (marcadores)" : feature_group_d99118fc80d35af7ed99dbeb7c67ccaf,
+                    "Desplazamientos en avi\u00f3n (junio 2026)" : feature_group_d470d2090ebcdf53021dca973a11def1,
+                    "Ruta animada (avi\u00f3n + conexiones)" : feature_group_c8acdb62157977a8ce27a241fb0e9eee,
+                },
+            };
+            L.control.layers(
+                layer_control_8afe0afd07c8fe929417747488b23340.base_layers,
+                layer_control_8afe0afd07c8fe929417747488b23340.overlays,
+                {"autoZIndex": true, "collapsed": false, "position": "topright"}
+            ).addTo(map_fca6e24741b2b41c875903cc8f916e2e);
+        
+    
+            map_fca6e24741b2b41c875903cc8f916e2e.fitBounds(
+                [[13.7563, 100.5018], [18.7883, 98.9853], [9.512, 100.0136], [10.0986, 99.838]],
+                {"padding": [30, 30]}
+            );
+        
+</script>
+</html>
